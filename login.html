@@ -26,10 +26,15 @@
                     <p style="text-align: center; ">LOG IN</p>
                 </div>
                 <div style="height: 90%; ">
-                    <form action="islem.php" method="post">
-                        <label for="isim" style="top: 50px; display: flex; justify-content: center; align-items: center;">Öğrenci Numarasini Giriniz</label>
-                        <input type="text" name="numara" id="numara" style="display: flex; justify-content: center; align-items: center;">
-                        <button type="submit" style="display: flex; justify-content: center; align-items: center;">Gönder</button>
+                    <form action="islem.php" method="post" style="width: 300px; margin: 50px auto; left: 50px; position: relative;">
+                        <div>
+                            <label for="numara">Öğrenci Numarasını Giriniz</label><br><br>
+                            <input type="text" name="numara" id="numara"><br><br>
+                            <label for="şifre" >Şifreyi Giriniz</label><br><br>
+                            <input type="password" name="şifre" id="şifre"><br><br>
+                            <input type="submit" name="GİRİŞ YAP">
+                        </div>
+
                     </form>
 
                 </div>
