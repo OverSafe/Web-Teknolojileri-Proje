@@ -1,17 +1,47 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>OMDb API Film Arama</title>
+</head>
+<body>
+  <h2>Film Arama</h2>
+  <input type="text" id="searchInput" placeholder="Film adı girin" />
+  <button id="searchBtn">Ara</button>
 
+  <ul id="film-list"></ul>
 
+  <script>
+    const API_KEY = 'http://www.omdbapi.com/?i=tt3896198&apikey=d7925595'; // Buraya kendi OMDb API anahtarını yaz
 
-    <body style="height: 100%;">
-        <div class="container" style="background-color: #EDE8D0 ; height: 100%;">
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const query = document.getElementById('searchInput').value.trim();
+      const filmList = document.getElementById('film-list');
+      filmList.innerHTML = ''; 
 
-            
-        </div>
+      if (!query) {
+        alert('Lütfen film adı girin');
+        return;
+      }
 
-    </body>
-
-
-
-
+      fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.Response === "True") {
+            data.Search.forEach(film => {
+              const li = document.createElement('li');
+              li.textContent = `${film.Title} (${film.Year})`;
+              filmList.appendChild(li);
+            });
+          } else {
+            filmList.textContent = 'Film bulunamadı.';
+          }
+        })
+        .catch(err => {
+          filmList.textContent = 'Hata oluştu.';
+          console.error(err);
+        });
+    });
+  </script>
+</body>
 </html>

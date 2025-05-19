@@ -1,102 +1,110 @@
 <!DOCTYPE html>
-    <head>
-        <style>
-            .kutu {
-                
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hakkında</title>
+    <!-- Bootstrap CSS (Doğru rel) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .kutu {
+        background-color: #ede8d0;
+        border: 1px solid black;
+        position: relative;
+        padding: 20px;
+      }
 
-      background-color: #EDE8D0;
-      padding: 0;
-      margin: 0;
-      border: 1px solid black;
-      position: relative;
+      .kutu2 {
+        background-color: #787569;
+        border: 1px solid black;
+        padding: 10px;
+        height: 100%;
+      }
 
-        }
-            .kutu2{
-                background-color: #787569;
-                border: 1px solid black;
-                margin:0;
-                padding:0;
-                
+      .circle {
+        width: 400px;
+        height: 500px;
+        border-radius: 50%;
+        background-color: #444;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-align: center;
+        margin: 0 auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
 
-            }
-            .container{
-                min-height:100% ;
-            }
-            .circle {
- width: 400px;
-      height: 500px;
-      background-color:     ;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 1.5rem;
-      font-weight: bold;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
-  text-align: center;
-}
-        </style>
-        <meta charset="UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="style sheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+      .nav-link-custom {
+        color: black;
+        display: inline-block;
+        margin: 10px 15px;
+        font-weight: 500;
+        text-decoration: none;
+      }
 
-    </head>
-    <body>
-        
-        <div class="container">
-            
-            <div class="row">
-                <div class="container-fluid" >
-                    <div class="kutu">
-                        <a href="login.html">
-                            <button style="background-color: #C9C5B1; width: 75px; height: 30px ; bottom: -30px; right:-1400px ; position:relative" >Log in</button>
-                        </a>
-                        <h1 style="text-align: center;">Hakkında</h1>
-                    </div>
-                    
-                    
-                </div>
+      .nav-link-custom:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <!-- Üst Kutu -->
+      <div class="kutu text-center mb-4">
+        <a href="login.html" class="btn btn-secondary float-end">Log in</a>
+        <h1 class="text-center">Hakkında</h1>
+      </div>
+
+      <div class="row">
+        <!-- Ana İçerik -->
+        <div class="col-md-9">
+          <div class="kutu">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5OrsiIIRTpWEFI6jgII0GZtGhi8rMhvD1kg&s"
+              class="float-end ms-3 mb-3"
+              width="150"
+              height="150"
+            />
+
+            <div class="circle my-3">
+              Ben Sakarya Üniversitesinde 1. Sınıf Bilgisayar Mühendisi
+              Ayberk GÜNAL'ım. İstanbul'da dünyaya geldim ve üniversiteye
+              başlamadan önce orada yaşıyordum fakat aslen Tokatlıyım.
+              Bilgisayar oyunları oynamak en büyük hobimdir, bilgisayar
+              mühendisi olmamın büyük sebebi de bilgisayarla haşır neşir
+              olmamdır.
             </div>
-            <div class="row">
-                <div class="col-9 " >
-                    <div class="kutu" style="height: 85vh; ">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5OrsiIIRTpWEFI6jgII0GZtGhi8rMhvD1kg&s"  style="float: right; margin-right:10px; margin-top:10px;"  width="150" height="150">
-                        <div class="circle" style="display: flex;" >Ben Sakarya Üniversitesinde 1. Sınıf Bilgisayar Mühendisi Ayberk GÜNAL'ım. İstanbul'da dünyaya ve üniversiteye başlamadan önce de orada yaşıyordum fakat aslen Tokatlıyım. Bilgisayar oyunları oynamak en büyük hobimdir, bilgisayar mühendisi olmamın büyük sebebi de bilgisayarla haşır neşir olmamdır. </div>
-                        <img src="Screenshot_1.png" alt="sabis fotoğraf" height="300" weight="300" style="margin-top:100px; margin-left: 200px;">
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="kutu2" style="height: 15vh;">
-                        <a href="şehrim.html" style="color: black; position: absolute; bottom: -50px; left: 30px; ">
-                            Şehrim
 
-                        </a>
-                        <a href="iletişim.html" style=" color:black; position: absolute; bottom: -50px; left:100px;">
-                            İletişim
-                        </a>
-                        <a href="mirasımız.html" style="color: black; position: absolute; left:30px; bottom:-80px;">
-                            Mirasımız
-                        </a>
-                        <a href="ilgi alanları.html" style="color:black;position: absolute; bottom: -80px; left:100px;">
-                            İlgi Alanlarım
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-
+            <img
+              src="Screenshot_1.png"
+              alt="sabis fotoğraf"
+              width="300"
+              height="300"
+              class="d-block mx-auto mt-5"
+            />
+          </div>
         </div>
-        
-        
-        
-    </body>
 
-
+        <!-- Yan Menü -->
+        <div class="col-md-3">
+          <div class="kutu2 text-center">
+            <a href="şehrim.html" class="nav-link-custom">Şehrim</a>
+            <a href="iletişim.html" class="nav-link-custom">İletişim</a>
+            <a href="mirasımız.html" class="nav-link-custom">Takımımız</a>
+            <a href="ilgi alanları.html" class="nav-link-custom">İlgi Alanlarım</a>
+            <a href="özgecmis.html " class="nav-link-custom">Öz geçmişim</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
