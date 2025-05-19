@@ -1,47 +1,65 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>OMDb API Film Arama</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film Arama</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ede8d0;
+      text-align: center;
+      padding: 50px;
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-left: 10px;
+    }
+    .film {
+      margin-top: 20px;
+    }
+    .film img {
+      max-width: 200px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Film Arama</h2>
-  <input type="text" id="searchInput" placeholder="Film adı girin" />
-  <button id="searchBtn">Ara</button>
 
-  <ul id="film-list"></ul>
+  <h1>Film Arama</h1>
+  <input type="text" id="filmAdi" placeholder="Film adı girin">
+  <button onclick="filmAra()">Ara</button>
+
+  <div class="film" id="filmBilgisi"></div>
 
   <script>
-    const API_KEY = 'http://www.omdbapi.com/?i=tt3896198&apikey=d7925595'; // Buraya kendi OMDb API anahtarını yaz
-
-    document.getElementById('searchBtn').addEventListener('click', () => {
-      const query = document.getElementById('searchInput').value.trim();
-      const filmList = document.getElementById('film-list');
-      filmList.innerHTML = ''; 
-
-      if (!query) {
-        alert('Lütfen film adı girin');
-        return;
-      }
-
-      fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent(query)}`)
+    function filmAra() {
+      const filmAdi = document.getElementById('filmAdi').value;
+      const apiKey = 'd7925595'; // Buraya kendi API anahtarınızı yazın
+      fetch(`https://www.omdbapi.com/?t=${filmAdi}&apikey=${apiKey}&language=tr`)
         .then(response => response.json())
         .then(data => {
           if (data.Response === "True") {
-            data.Search.forEach(film => {
-              const li = document.createElement('li');
-              li.textContent = `${film.Title} (${film.Year})`;
-              filmList.appendChild(li);
-            });
+            document.getElementById('filmBilgisi').innerHTML = `
+              <h2>${data.Title} (${data.Year})</h2>
+              <img src="${data.Poster}" alt="Afiş">
+              <p><strong>Tür:</strong> ${data.Genre}</p>
+              <p><strong>Yönetmen:</strong> ${data.Director}</p>
+              <p><strong>Özet:</strong> ${data.Plot}</p>
+            `;
           } else {
-            filmList.textContent = 'Film bulunamadı.';
+            document.getElementById('filmBilgisi').innerHTML = '<p>Film bulunamadı.</p>';
           }
         })
-        .catch(err => {
-          filmList.textContent = 'Hata oluştu.';
-          console.error(err);
+        .catch(error => {
+          console.error('Hata:', error);
+          document.getElementById('filmBilgisi').innerHTML = '<p>Bir hata oluştu.</p>';
         });
-    });
+    }
   </script>
+
 </body>
 </html>

@@ -1,17 +1,267 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İletişim Sayfası</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ede8d0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
+    #app {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 90%;
+      box-sizing: border-box;
+    }
 
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-    <body style="height: 100%;">
-        <div class="container" style="background-color: #EDE8D0 ; height: 100%;">
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
 
-            
-        </div>
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 1rem;
+    }
 
-    </body>
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 5px;
+    }
 
+    .radio-group,
+    .checkbox-group {
+      margin-top: 10px;
+    }
 
+    .button-group {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
 
+    button {
+      padding: 10px 15px;
+      background-color: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      flex: 1 1 45%;
+    }
 
+    button:hover {
+      background-color: #5a6268;
+    }
+
+    .mesaj {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .hata {
+      color: red;
+    }
+
+    .basari {
+      color: green;
+    }
+
+    @media (max-width: 480px) {
+      #app {
+        padding: 20px;
+      }
+
+      button {
+        flex: 1 1 100%;
+      }
+
+      input, select, textarea {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <h2>İletişim Formu</h2>
+
+    <form id="iletisimForm" @submit.prevent>
+      <label>Ad Soyad:
+        <input type="text" id="adSoyad" v-model="form.adSoyad">
+      </label>
+
+      <label>E-posta:
+        <input type="text" id="email" v-model="form.email">
+      </label>
+
+      <label>Telefon:
+        <input type="text" id="telefon" v-model="form.telefon">
+      </label>
+
+      <label>Konu:
+        <select id="konu" v-model="form.konu">
+          <option value="">Seçiniz</option>
+          <option value="destek">Destek</option>
+          <option value="sikayet">Şikayet</option>
+          <option value="oneri">Öneri</option>
+        </select>
+      </label>
+
+      <label>Mesaj:
+        <textarea id="mesaj" rows="4" v-model="form.mesaj"></textarea>
+      </label>
+
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="cinsiyet" value="erkek" v-model="form.cinsiyet"> Erkek
+        </label>
+        <label>
+          <input type="radio" name="cinsiyet" value="kadın" v-model="form.cinsiyet"> Kadın
+        </label>
+      </div>
+
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="kvkk" v-model="form.kvkk"> KVKK'yı kabul ediyorum
+        </label>
+      </div>
+
+      <div class="button-group">
+        <button type="button" onclick="vanillaKontrol()">JS ile Kontrol</button>
+        <button type="button" @click="vueKontrol">Vue.js ile Kontrol</button>
+        <button type="button" @click="formuGonder">Gönder</button>
+        <button type="button" @click="formuTemizle">Temizle</button>
+      </div>
+    </form>
+
+    <div class="mesaj">
+      <p class="hata" v-if="hataMesaji">{{ hataMesaji }}</p>
+      <p class="basari" v-if="basariMesaji">{{ basariMesaji }}</p>
+    </div>
+  </div>
+
+  <!-- JavaScript Kontrol -->
+  <script>
+    function vanillaKontrol() {
+      const ad = document.getElementById("adSoyad").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const telefon = document.getElementById("telefon").value.trim();
+      const konu = document.getElementById("konu").value;
+      const mesaj = document.getElementById("mesaj").value.trim();
+      const cinsiyet = document.querySelector('input[name="cinsiyet"]:checked');
+      const kvkk = document.getElementById("kvkk").checked;
+
+      let hata = "";
+
+      if (!ad || !email || !telefon || !konu || !mesaj || !cinsiyet || !kvkk) {
+        hata = "Lütfen tüm alanları doldurun ve KVKK'yı onaylayın.";
+      } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        hata = "Geçerli bir e-posta adresi giriniz.";
+      } else if (!/^\d+$/.test(telefon)) {
+        hata = "Telefon sadece rakamlardan oluşmalıdır.";
+      }
+
+      if (hata) {
+        alert("JS Kontrol: " + hata);
+      } else {
+        alert("JS Kontrol: Form başarıyla doğrulandı.");
+      }
+    }
+  </script>
+
+  <!-- Vue.js -->
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        form: {
+          adSoyad: '',
+          email: '',
+          telefon: '',
+          konu: '',
+          mesaj: '',
+          cinsiyet: '',
+          kvkk: false
+        },
+        hataMesaji: '',
+        basariMesaji: ''
+      },
+      methods: {
+        vueKontrol() {
+          this.hataMesaji = '';
+          this.basariMesaji = '';
+
+          if (!this.form.adSoyad || !this.form.email || !this.form.telefon ||
+              !this.form.konu || !this.form.mesaj || !this.form.cinsiyet || !this.form.kvkk) {
+            this.hataMesaji = 'Lütfen tüm alanları doldurun ve KVKK’yı onaylayın.';
+            return;
+          }
+
+          const emailRegex = /^\S+@\S+\.\S+$/;
+          if (!emailRegex.test(this.form.email)) {
+            this.hataMesaji = 'Geçerli bir e-posta adresi giriniz.';
+            return;
+          }
+
+          const telRegex = /^\d+$/;
+          if (!telRegex.test(this.form.telefon)) {
+            this.hataMesaji = 'Telefon sadece rakamlardan oluşmalıdır.';
+            return;
+          }
+
+          this.basariMesaji = 'Vue.js Kontrol: Form başarıyla doğrulandı.';
+        },
+        formuGonder() {
+          this.vueKontrol();
+          if (!this.hataMesaji) {
+            this.basariMesaji = 'Form gönderildi!';
+          }
+        },
+        formuTemizle() {
+          this.form = {
+            adSoyad: '',
+            email: '',
+            telefon: '',
+            konu: '',
+            mesaj: '',
+            cinsiyet: '',
+            kvkk: false
+          };
+          this.hataMesaji = '';
+          this.basariMesaji = '';
+        }
+      }
+    });
+  </script>
+
+</body>
 </html>
