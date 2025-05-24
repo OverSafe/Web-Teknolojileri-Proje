@@ -3,35 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stil.css">
   <title>Film Arama</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #ede8d0;
-      text-align: center;
-      padding: 50px;
-    }
-    input {
-      padding: 10px;
-      width: 300px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-left: 10px;
-    }
-    .film {
-      margin-top: 20px;
-    }
-    .film img {
-      max-width: 200px;
-    }
-  </style>
+  
 </head>
-<body>
+<body class="ilgi">
 
   <h1>Film Arama</h1>
-  <input type="text" id="filmAdi" placeholder="Film adı girin">
-  <button onclick="filmAra()">Ara</button>
+  <input type="text" id="filmAdi" placeholder="Film adı girin" class="ilgi">
+  <button onclick="filmAra()" class="ilgi">Ara</button>
 
   <div class="film" id="filmBilgisi"></div>
 
