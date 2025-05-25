@@ -6,28 +6,27 @@
   <link rel="stylesheet" href="stil.css">
   <title>İletişim Sayfası</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  
 </head>
 <body class="iletisim">
 
   <div id="app">
     <h2>İletişim Formu</h2>
 
-    <form id="iletisimForm" @submit.prevent method="post" action="goster.php">
+    <form id="iletisimForm" method="post" action="goster.php">
       <label>Ad Soyad:
-        <input type="text" id="adSoyad" v-model="form.adSoyad">
+        <input type="text" id="adSoyad" name="adSoyad" v-model="form.adSoyad">
       </label>
 
       <label>E-posta:
-        <input type="text" id="email" v-model="form.email">
+        <input type="text" id="email" name="email" v-model="form.email">
       </label>
 
       <label>Telefon:
-        <input type="text" id="telefon" v-model="form.telefon">
+        <input type="text" id="telefon" name="telefon" v-model="form.telefon">
       </label>
 
       <label>Konu:
-        <select id="konu" v-model="form.konu">
+        <select id="konu" name="konu" v-model="form.konu">
           <option value="">Seçiniz</option>
           <option value="destek">Destek</option>
           <option value="sikayet">Şikayet</option>
@@ -36,12 +35,12 @@
       </label>
 
       <label>Mesaj:
-        <textarea id="mesaj" rows="4" v-model="form.mesaj"></textarea>
+        <textarea id="mesaj" name="mesaj" rows="4" v-model="form.mesaj"></textarea>
       </label>
 
-      <div class="radio-group" class="form-radios">
+      <div class="radio-group">
         <label>
-          <input  type="radio" name="cinsiyet" value="erkek" v-model="form.cinsiyet"> Erkek
+          <input type="radio" name="cinsiyet" value="erkek" v-model="form.cinsiyet"> Erkek
         </label>
         <label>
           <input type="radio" name="cinsiyet" value="kadın" v-model="form.cinsiyet"> Kadın
@@ -50,7 +49,7 @@
 
       <div class="checkbox-group">
         <label>
-          <input type="checkbox" id="onay" v-model="form.kvkk"> Onayladım
+          <input type="checkbox" id="onay" name="kvkk" v-model="form.kvkk"> Onayladım
         </label>
       </div>
 
@@ -68,7 +67,6 @@
     </div>
   </div>
 
-  <!-- JavaScript Kontrol -->
   <script>
     function vanillaKontrol() {
       const ad = document.getElementById("adSoyad").value.trim();
@@ -77,12 +75,12 @@
       const konu = document.getElementById("konu").value;
       const mesaj = document.getElementById("mesaj").value.trim();
       const cinsiyet = document.querySelector('input[name="cinsiyet"]:checked');
-      const kvkk = document.getElementById("kvkk").checked;
+      const kvkk = document.getElementById("onay").checked;
 
       let hata = "";
 
       if (!ad || !email || !telefon || !konu || !mesaj || !cinsiyet || !kvkk) {
-        hata = "Lütfen tüm alanları doldurun ve KVKK'yı onaylayın.";
+        hata = "Lütfen tüm alanları doldurun ve onaylayın.";
       } else if (!/^\S+@\S+\.\S+$/.test(email)) {
         hata = "Geçerli bir e-posta adresi giriniz.";
       } else if (!/^\d+$/.test(telefon)) {
@@ -95,10 +93,7 @@
         alert("JS Kontrol: Form başarıyla doğrulandı.");
       }
     }
-  </script>
 
-  <!-- Vue.js -->
-  <script>
     new Vue({
       el: '#app',
       data: {
@@ -121,7 +116,7 @@
 
           if (!this.form.adSoyad || !this.form.email || !this.form.telefon ||
               !this.form.konu || !this.form.mesaj || !this.form.cinsiyet || !this.form.kvkk) {
-            this.hataMesaji = 'Lütfen tüm alanları doldurun ve KVKK’yı onaylayın.';
+            this.hataMesaji = 'Lütfen tüm alanları doldurun ve onaylayın.';
             return;
           }
 
@@ -142,7 +137,7 @@
         formuGonder() {
           this.vueKontrol();
           if (!this.hataMesaji) {
-            this.basariMesaji = 'Form gönderildi!';
+            document.getElementById("iletisimForm").submit();
           }
         },
         formuTemizle() {
