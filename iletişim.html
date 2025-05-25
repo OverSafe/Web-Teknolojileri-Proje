@@ -39,9 +39,9 @@
         <textarea id="mesaj" rows="4" v-model="form.mesaj"></textarea>
       </label>
 
-      <div class="radio-group">
+      <div class="radio-group" class="form-radios">
         <label>
-          <input type="radio" name="cinsiyet" value="erkek" v-model="form.cinsiyet"> Erkek
+          <input  type="radio" name="cinsiyet" value="erkek" v-model="form.cinsiyet"> Erkek
         </label>
         <label>
           <input type="radio" name="cinsiyet" value="kadın" v-model="form.cinsiyet"> Kadın
@@ -50,7 +50,7 @@
 
       <div class="checkbox-group">
         <label>
-          <input type="checkbox" id="kvkk" v-model="form.kvkk"> KVKK'yı kabul ediyorum
+          <input type="checkbox" id="onay" v-model="form.kvkk"> Onayladım
         </label>
       </div>
 

@@ -27,7 +27,7 @@ if (!is_valid_email($username)) {
 
 
 // Şifre doğru mu kontrol et
-if ($password === "b241210008"||$username==="b181210008@sakarya.edu.tr") {
+if ($password === "b241210008"||$username==="b241210008@sakarya.edu.tr") {
     // Başarılı giriş
     echo "Hoşgeldiniz, $password!";
 } else {

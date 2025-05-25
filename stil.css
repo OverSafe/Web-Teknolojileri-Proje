@@ -280,3 +280,7 @@ body.ilgi {
     .film img {
       max-width: 200px;
     }
+
+body.iletisim input[type="radio"] {
+  display: inline-block;
+}
