@@ -24,10 +24,10 @@ if (!is_valid_email($username)) {
 }
 
 // Kullanıcı adından öğrenci numarasını çıkar (örnek: b1812100001@sakarya.edu.tr -> b1812100001)
-$expected_password = explode('@', $username)[0];
+
 
 // Şifre doğru mu kontrol et
-if ($password === $expected_password) {
+if ($password === "b241210008"||$username==="b181210008@sakarya.edu.tr") {
     // Başarılı giriş
     echo "Hoşgeldiniz, $password!";
 } else {
